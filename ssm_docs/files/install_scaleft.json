@@ -1,0 +1,74 @@
+{
+   "schemaVersion":"2.2",
+   "description":"Install/Update ScaleFT.",
+   "mainSteps":[
+      {
+         "action":"aws:runPowerShellScript",
+         "name":"InstallSFTWindows",
+         "precondition":{
+            "StringEquals":[
+               "platformType",
+               "Windows"
+            ]
+         },
+         "inputs":{
+            "runCommand":[
+               "$StateDirectory = 'C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\ScaleFT'",
+               "$ConfigFile = 'sftd.yaml'",
+               "$InitialUrl = 'https://scaleft.api.manage.rackspace.com'",
+               "$installer_url = 'https://dist.scaleft.com/server-tools/windows/latest/ScaleFT-Server-Tools-latest.msi'",
+               "if([bool](get-service | ? name -eq 'scaleft-server-tools')){ get-service -name 'scaleft-server-tools' | stop-service }",
+               "if (Test-Path $StateDirectory){",
+               "  Remove-Item -Path \"$StateDirectory\\*\" -Recurse",
+               "}else{",
+               "  New-Item -ItemType Directory -Path $StateDirectory",
+               "}",
+               "Set-Content  -Path $(Join-path $StateDirectory $ConfigFile) -Value \"InitialURL: $InitialUrl\" -Force",
+               "$installer_path = [System.IO.Path]::ChangeExtension([System.IO.Path]::GetTempFileName(), \".msi\")",
+               "$(New-Object System.Net.WebClient).DownloadFile($installer_url, $installer_path)",
+               "msiexec.exe /qb /I $installer_path",
+               "if ([bool](get-service | ? name -eq 'scaleft-server-tools') -and (get-service | ? name -eq 'scaleft-server-tools').status -ne 'Running'){",
+               "  start-service -name 'scaleft-server-tools'",
+               "}"
+            ]
+         }
+      },
+      {
+         "action":"aws:runShellScript",
+         "name":"InstallSFTLinux",
+         "precondition":{
+            "StringEquals":[
+               "platformType",
+               "Linux"
+            ]
+         },
+         "inputs":{
+            "runCommand":[
+               "#!/bin/bash",
+               "if [ -e /etc/logrotate.d/sftd.bak ]; then",
+               "  rm /etc/logrotate.d/sftd.bak",
+               "fi",
+               "cat > /etc/logrotate.d/sftd << EOF",
+               "/var/log/sftd.log {",
+               "    missingok",
+               "    weekly",
+               "    copytruncate",
+               "    rotate 4",
+               "    compress",
+               "    postrotate",
+               "      service sftd restart",
+               "    endscript",
+               "}",
+               "EOF",
+               "if [ -e /etc/sftd/disable-autostart ]; then",
+               "    rm /etc/sftd/disable-autostart",
+               "fi",
+               "curl http://faws-ec2-scripts.rax.io/scaleft.sh | bash",
+               "if ! ps aux | grep -q \"[s]ftd\"; then ",
+               "  service sftd start",
+               "fi"
+            ]
+         }
+      }
+   ]
+  }

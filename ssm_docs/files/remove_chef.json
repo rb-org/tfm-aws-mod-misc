@@ -1,0 +1,25 @@
+{
+    "schemaVersion":"2.2",
+    "description":"Remove Chef",
+    "mainSteps":[
+       {
+          "action":"aws:runPowerShellScript",
+          "name":"RemoveChefWindows",
+          "precondition":{
+             "StringEquals":[
+                "platformType",
+                "Windows"
+             ]
+          },
+          "inputs":{
+             "runCommand": [
+               "$app = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name.StartsWith(\"Chef Client\") }",
+               "if ($app) { $app.Uninstall() }",
+               "if (Test-Path \"c:/opscode\") { Remove-Item \"c:/opscode\" -Recurse -Force }",
+               "if (Test-Path \"c:/chef\") { Remove-Item \"c:/chef\" -Recurse -Force }"
+             ]
+          }
+       }
+    ]
+   }
+ 

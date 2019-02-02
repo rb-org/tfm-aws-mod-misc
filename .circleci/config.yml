@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  lint_validate:
+    docker:
+      - image: hashicorp/terraform:light
+    steps:
+      - checkout
+      - run: 
+          name: lint-validate
+          command: |
+            chmod +x .circleci/lint.sh
+            chmod +x .circleci/validate.sh
+            .circleci/lint.sh
+            .circleci/validate.sh
+workflows:
+  version: 2
+  lint_validate:
+    jobs:
+      - lint_validate
