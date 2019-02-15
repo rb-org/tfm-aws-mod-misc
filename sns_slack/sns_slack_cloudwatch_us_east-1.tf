@@ -1,5 +1,5 @@
 module "notify_slack_ok_cw" {
-  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.2"
+  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
 
   providers {
     aws = "aws.cloudwatch"
@@ -17,7 +17,7 @@ module "notify_slack_ok_cw" {
 }
 
 module "notify_slack_urgent_cw" {
-  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.2"
+  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
 
   providers {
     aws = "aws.cloudwatch"
@@ -35,7 +35,7 @@ module "notify_slack_urgent_cw" {
 }
 
 module "notify_slack_emergency_cw" {
-  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.2"
+  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
 
   providers {
     aws = "aws.cloudwatch"
@@ -53,7 +53,7 @@ module "notify_slack_emergency_cw" {
 }
 
 module "notify_slack_default_cw" {
-  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.2"
+  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
 
   providers {
     aws = "aws.cloudwatch"
