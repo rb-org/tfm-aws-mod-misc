@@ -23,3 +23,7 @@ variable "create_all" {
 variable "create_sns_topic" {
   default = false
 }
+
+variable "use_source_hash" {
+  default = "false"
+}
