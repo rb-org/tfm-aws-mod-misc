@@ -25,5 +25,5 @@ variable "create_sns_topic" {
 }
 
 variable "use_source_hash" {
-  default = "false"
+  default = false
 }
