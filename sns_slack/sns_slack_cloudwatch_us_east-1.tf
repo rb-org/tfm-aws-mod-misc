@@ -1,6 +1,5 @@
 module "notify_slack_ok_cw" {
-  source  = "terraform-aws-modules/notify-slack/aws"
-  version = "1.11.0"
+  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
 
   providers {
     aws = "aws.cloudwatch"
@@ -18,8 +17,7 @@ module "notify_slack_ok_cw" {
 }
 
 module "notify_slack_urgent_cw" {
-  source  = "terraform-aws-modules/notify-slack/aws"
-  version = "1.11.0"
+  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
 
   providers {
     aws = "aws.cloudwatch"
@@ -37,8 +35,7 @@ module "notify_slack_urgent_cw" {
 }
 
 module "notify_slack_emergency_cw" {
-  source  = "terraform-aws-modules/notify-slack/aws"
-  version = "1.11.0"
+  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
 
   providers {
     aws = "aws.cloudwatch"
@@ -56,8 +53,7 @@ module "notify_slack_emergency_cw" {
 }
 
 module "notify_slack_default_cw" {
-  source  = "terraform-aws-modules/notify-slack/aws"
-  version = "1.11.0"
+  source = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
 
   providers {
     aws = "aws.cloudwatch"

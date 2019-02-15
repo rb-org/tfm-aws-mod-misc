@@ -1,7 +1,5 @@
 module "notify_slack_ok" {
-  source  = "terraform-aws-modules/notify-slack/aws"
-  version = "1.11.0"
-
+  source         = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
   sns_topic_name = "${local.sns_topic_ok_name}"
 
   slack_webhook_url    = "${var.sns_slack_webhook}"
@@ -14,9 +12,7 @@ module "notify_slack_ok" {
 }
 
 module "notify_slack_urgent" {
-  source  = "terraform-aws-modules/notify-slack/aws"
-  version = "1.11.0"
-
+  source         = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
   sns_topic_name = "${local.sns_topic_urgent_name}"
 
   slack_webhook_url    = "${var.sns_slack_webhook}"
@@ -29,9 +25,7 @@ module "notify_slack_urgent" {
 }
 
 module "notify_slack_emergency" {
-  source  = "terraform-aws-modules/notify-slack/aws"
-  version = "1.11.0"
-
+  source         = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
   sns_topic_name = "${local.sns_topic_emergency_name}"
 
   slack_webhook_url    = "${var.sns_slack_webhook}"
@@ -44,9 +38,7 @@ module "notify_slack_emergency" {
 }
 
 module "notify_slack_default" {
-  source  = "terraform-aws-modules/notify-slack/aws"
-  version = "1.11.0"
-
+  source         = "github.com/rb-org/tfm-aws-mod-sns-slack?ref=v0.0.1"
   sns_topic_name = "${local.sns_topic_default_name}"
 
   slack_webhook_url    = "${var.sns_slack_webhook}"
