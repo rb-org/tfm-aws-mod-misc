@@ -14,6 +14,7 @@ module "notify_slack_ok_cw" {
   lambda_function_name = "${local.lambda_name_ok}"
   create               = "${var.create_all}"
   create_sns_topic     = "${var.create_sns_topic}"
+  use_source_hash      = "${var.use_source_hash}"
 }
 
 module "notify_slack_urgent_cw" {
@@ -32,6 +33,7 @@ module "notify_slack_urgent_cw" {
   lambda_function_name = "${local.lambda_name_urgent}"
   create               = "${var.create_all}"
   create_sns_topic     = "${var.create_sns_topic}"
+  use_source_hash      = "${var.use_source_hash}"
 }
 
 module "notify_slack_emergency_cw" {
@@ -50,6 +52,7 @@ module "notify_slack_emergency_cw" {
   lambda_function_name = "${local.lambda_name_emergency}"
   create               = "${var.create_all}"
   create_sns_topic     = "${var.create_sns_topic}"
+  use_source_hash      = "${var.use_source_hash}"
 }
 
 module "notify_slack_default_cw" {
@@ -68,4 +71,5 @@ module "notify_slack_default_cw" {
   lambda_function_name = "${local.lambda_name_default}"
   create               = "${var.create_all}"
   create_sns_topic     = "${var.create_sns_topic}"
+  use_source_hash      = "${var.use_source_hash}"
 }
